@@ -5,6 +5,11 @@
         "php": ">=8.4",
         "ext-ctype": "*",
         "ext-iconv": "*",
+        "ext-pgsql": "*",
+        "doctrine/dbal": "^3",
+        "doctrine/doctrine-bundle": "^2.16",
+        "doctrine/doctrine-migrations-bundle": "^3.4",
+        "doctrine/orm": "^3.5",
         "symfony/console": "7.3.*",
         "symfony/dotenv": "7.3.*",
         "symfony/flex": "^2.8.2",
@@ -13,8 +18,11 @@
         "symfony/yaml": "7.3.*"
     },
     "require-dev": {
+        "behat/behat": "^3.23",
         "phpunit/phpunit": "^12.3.8",
-        "behat/behat": "^3.23"
+        "symfony/browser-kit": "7.3.*",
+        "symfony/css-selector": "7.3.*",
+        "symfony/maker-bundle": "^1.64"
     },
     "license": "MIT",
     "config": {
