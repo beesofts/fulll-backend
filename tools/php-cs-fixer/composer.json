@@ -1,0 +1,13 @@
+{
+  "name": "benoit/php-cs-fixer",
+  "type": "project",
+  "authors": [
+    {
+      "name": "Benoît Wery",
+      "email": "benoit.wery@beesofts.fr"
+    }
+  ],
+  "require": {
+    "friendsofphp/php-cs-fixer": "^3.54"
+  }
+}
