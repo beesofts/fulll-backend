@@ -1,5 +1,18 @@
-.idea
+/.idea/
+/.phpunit.cache/
+/var/
 vendor
 .php-cs-fixer.cache
-.phpunit.cache
-var/phpstan
+
+###> phpunit/phpunit ###
+/phpunit.xml
+###< phpunit/phpunit ###
+
+###> symfony/framework-bundle ###
+/.env.local
+/.env.local.php
+/.env.*.local
+/config/secrets/prod/prod.decrypt.private.php
+/public/bundles/
+/vendor/
+###< symfony/framework-bundle ###
