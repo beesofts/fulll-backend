@@ -1,0 +1,73 @@
+#!/usr/bin/php
+<?php
+
+function displayUsage(): void
+{
+    echo <<<'usage'
+Fleet handler
+-------------
+Usage:
+
+Create a fleet:
+    fleet create <userId> # returns fleetId on the standard output
+Add a vehicle to an existing fleet:
+    fleet register-vehicle <fleetId> <vehiclePlateNumber>
+Specify a vehicle location:
+    fleet localize-vehicle <fleetId> <vehiclePlateNumber> lat lng
+
+usage;
+
+}
+
+function displayNotEnoughArguments($command): void
+{
+    displayUsage();
+    echo "\n";
+    printf('Not enough arguments for command "%s"' . "\n", $command);
+    die();
+}
+
+if ($argc < 2) {
+    displayUsage();
+    exit(1);
+}
+
+$command = $argv[1];
+
+$output = [];
+switch ($command) {
+    case 'create':
+        if ($argc < 3) {
+            displayNotEnoughArguments($command);
+        }
+
+        $command = 'php bin/console app:fleet:create ' . implode(' ', array_slice($argv, 2));
+        exec($command, $output);
+        break;
+
+    case 'register-vehicle':
+        if ($argc < 4) {
+            displayNotEnoughArguments($command);
+        }
+
+        $command = 'php bin/console app:fleet:register-vehicle ' . implode(' ', array_slice($argv, 2));
+        exec($command, $output);
+        break;
+
+    case 'localize-vehicle':
+        if ($argc < 6) {
+            displayNotEnoughArguments($command);
+        }
+
+        $command = 'php bin/console app:fleet:localize-vehicle ' . implode(' ', array_slice($argv, 2));
+        exec($command, $output);
+        break;
+
+    default:
+        printf('Unknown command "%s"' . "\n", $command);
+        die();
+}
+
+foreach ($output as $line) {
+    echo $line . "\n";
+}
