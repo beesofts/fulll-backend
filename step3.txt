@@ -1,0 +1,11 @@
+Other tools:
+deptrac can help to keep architecture clean
+
+CI process:
+install vendor
+run code analysis tools
+create empty database
+run migrations
+run fixtures
+run tests
+deploy
