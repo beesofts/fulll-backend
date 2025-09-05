@@ -17,7 +17,10 @@ down:
 
 # TESTS
 
-tests: phpstan phpunit behat
+tests: composer-require-checker phpstan phpunit behat
+
+composer-require-checker:
+	php tools/composer-require-checker/vendor/bin/composer-require-checker check composer.json
 
 phpunit: vendor
 	php -d memory_limit=256M vendor/bin/phpunit --stop-on-defect
