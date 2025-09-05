@@ -9,6 +9,12 @@ reset-database:
 	php bin/console doctrine:database:create
 	php bin/console doctrine:migrations:migrate --no-interaction
 
+up: vendor
+	docker compose up -d
+
+down:
+	docker compose down
+
 # TESTS
 
 tests: phpstan phpunit behat
