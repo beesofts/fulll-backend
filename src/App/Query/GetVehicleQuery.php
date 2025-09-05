@@ -3,12 +3,12 @@
 namespace App\App\Query;
 
 use App\Domain\Model\Vehicle;
-use App\Tests\Repository\VehicleRepositoryInMemory;
+use App\App\Port\VehicleRepositoryPort;
 
 readonly class GetVehicleQuery
 {
     public function __construct(
-        private VehicleRepositoryInMemory $vehicleRepository,
+        private VehicleRepositoryPort $vehicleRepository,
     ) {
     }
 
