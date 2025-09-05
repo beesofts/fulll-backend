@@ -2,20 +2,24 @@
 
 namespace App\Infra\Repository;
 
+use App\App\Port\VehicleRepositoryPort;
 use App\Domain\Model\Vehicle;
+use Doctrine\ORM\EntityManagerInterface;
 
-class VehicleRepository
+readonly class VehicleRepository implements VehicleRepositoryPort
 {
-    /** @var Vehicle[] */
-    private array $vehicles = [];
-
-    public function save(Vehicle $vehicle): void
+    public function __construct(private EntityManagerInterface $entityManager)
     {
-        $this->vehicles[$vehicle->getPlateNumber()] = $vehicle;
     }
 
     public function find(string $plateNumber): ?Vehicle
     {
-        return $this->vehicles[$plateNumber] ?? null;
+        return $this->entityManager->getRepository(Vehicle::class)->find($plateNumber);
+    }
+
+    public function save(Vehicle $vehicle): void
+    {
+        $this->entityManager->persist($vehicle);
+        $this->entityManager->flush();
     }
 }

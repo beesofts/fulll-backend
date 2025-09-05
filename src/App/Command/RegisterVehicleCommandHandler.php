@@ -3,16 +3,16 @@
 namespace App\App\Command;
 
 use App\App\Exception\EntityNotFoundException;
+use App\App\Port\FleetRepositoryPort;
+use App\App\Port\VehicleRepositoryPort;
 use App\Domain\Model\Fleet;
 use App\Domain\Model\Vehicle;
-use App\Infra\Repository\FleetRepository;
-use App\Infra\Repository\VehicleRepository;
 
 readonly class RegisterVehicleCommandHandler
 {
     public function __construct(
-        private VehicleRepository $vehicleRepository,
-        private FleetRepository $fleetRepository,
+        private VehicleRepositoryPort $vehicleRepository,
+        private FleetRepositoryPort $fleetRepository,
     ) {
     }
 

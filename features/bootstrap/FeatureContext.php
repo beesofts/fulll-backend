@@ -10,9 +10,9 @@ use App\Domain\Model\Fleet;
 use App\Domain\Model\User;
 use App\Domain\Model\Vehicle;
 use App\Domain\ValueObject\Location;
-use App\Infra\Repository\FleetRepository;
-use App\Infra\Repository\VehicleRepository;
 use App\Shared\IdGenerator;
+use App\Tests\Repository\FleetRepositoryInMemory;
+use App\Tests\Repository\VehicleRepositoryInMemory;
 use Behat\Behat\Context\Context;
 use Behat\Step\Given;
 use Behat\Step\Then;
@@ -31,16 +31,16 @@ class FeatureContext implements Context
 
     private ?Location $location = null;
 
-    private FleetRepository $fleetRepository;
+    private FleetRepositoryInMemory $fleetRepository;
 
-    private VehicleRepository $vehicleRepository;
+    private VehicleRepositoryInMemory $vehicleRepository;
 
     private \Exception|null $lastError = null;
 
     public function __construct()
     {
-        $this->fleetRepository = new FleetRepository();
-        $this->vehicleRepository = new VehicleRepository();
+        $this->fleetRepository = new FleetRepositoryInMemory();
+        $this->vehicleRepository = new VehicleRepositoryInMemory();
 
         $this->user = new User('Current User');
     }

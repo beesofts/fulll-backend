@@ -19,7 +19,7 @@ class FleetTest extends TestCase
         $fleet->registerVehicle(new Vehicle('1234'));
 
         self::assertCount(1, $fleet->getVehicles());
-        self::assertEquals('1234', $fleet->getVehicles()[0]->getPlateNumber());
+        self::assertEquals('1234', iterator_to_array($fleet->getVehicles())[0]->getPlateNumber());
     }
 
     public function testRegisterTwiceVehicleThrowsAnException(): void

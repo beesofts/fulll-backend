@@ -2,11 +2,16 @@
 
 namespace App\Domain\ValueObject;
 
+use Doctrine\ORM\Mapping as ORM;
+
+#[ORM\Embeddable]
 readonly class Location
 {
-    private float $latitude;
+    #[ORM\Column(type: 'float', nullable: true)]
+    private ?float $latitude;
 
-    private float $longitude;
+    #[ORM\Column(type: 'float', nullable: true)]
+    private ?float $longitude;
 
     public function __construct(
         float $latitude,
@@ -16,12 +21,12 @@ readonly class Location
         $this->longitude = $longitude;
     }
 
-    public function getLatitude(): float
+    public function getLatitude(): ?float
     {
         return $this->latitude;
     }
 
-    public function getLongitude(): float
+    public function getLongitude(): ?float
     {
         return $this->longitude;
     }

@@ -4,14 +4,14 @@ namespace App\App\Command;
 
 use App\App\Exception\EntityNotFoundException;
 use App\App\Exception\VehicleAlreadyParkedAtThisLocation;
+use App\App\Port\VehicleRepositoryPort;
 use App\Domain\Model\Vehicle;
 use App\Domain\ValueObject\Location;
-use App\Infra\Repository\VehicleRepository;
 
 readonly class ParkVehicleCommandHandler
 {
     public function __construct(
-        private VehicleRepository $vehicleRepository,
+        private VehicleRepositoryPort $vehicleRepository,
     ) {
     }
 

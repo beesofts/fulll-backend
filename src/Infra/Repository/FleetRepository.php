@@ -2,20 +2,29 @@
 
 namespace App\Infra\Repository;
 
+use App\App\Port\FleetRepositoryPort;
 use App\Domain\Model\Fleet;
+use Doctrine\ORM\EntityManagerInterface;
 
-class FleetRepository
+readonly class FleetRepository implements FleetRepositoryPort
 {
-    /** @var Fleet[] */
-    private array $fleets = [];
-
-    public function save(Fleet $fleet): void
+    public function __construct(private EntityManagerInterface $entityManager)
     {
-        $this->fleets[$fleet->getId()] = $fleet;
     }
 
     public function find(string $id): ?Fleet
     {
-        return $this->fleets[$id] ?? null;
+        return $this->entityManager->getRepository(Fleet::class)->find($id);
+    }
+
+    public function save(Fleet $fleet): void
+    {
+        $this->entityManager->persist($fleet);
+        $this->entityManager->flush();
+    }
+
+    public function findAll(): array
+    {
+        return $this->entityManager->getRepository(Fleet::class)->findAll();
     }
 }

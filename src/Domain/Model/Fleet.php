@@ -3,6 +3,7 @@
 namespace App\Domain\Model;
 
 use App\App\Exception\VehicleAlreadyRegisteredException;
+use App\Shared\IteratorUtility;
 
 class Fleet
 {
@@ -11,7 +12,7 @@ class Fleet
     private User $owner;
 
     /** @var Vehicle[] */
-    private array $vehicles = [];
+    private iterable $vehicles = [];
 
     public function __construct(
         string $id,
@@ -34,7 +35,7 @@ class Fleet
     /**
      * @return Vehicle[]
      */
-    public function getVehicles(): array
+    public function getVehicles(): iterable
     {
         return $this->vehicles;
     }
@@ -58,7 +59,7 @@ class Fleet
             throw new VehicleAlreadyRegisteredException($vehicle->getPlateNumber());
         }
 
-        $this->vehicles[] = $vehicle;
+        IteratorUtility::iterator_add($this->vehicles, $vehicle);
 
         return $this;
     }
@@ -66,7 +67,7 @@ class Fleet
     public function hasVehicle(string $plateNumber): bool
     {
         return null !== array_find(
-            $this->vehicles,
+            iterator_to_array($this->vehicles),
             static fn (Vehicle $vehicle) => $vehicle->getPlateNumber() === $plateNumber
         );
     }
@@ -74,7 +75,7 @@ class Fleet
     public function removeVehicle(string $plateNumber): self
     {
         $this->vehicles = array_filter(
-            $this->vehicles,
+            iterator_to_array($this->vehicles),
             static fn (Vehicle $vehicle) => $vehicle->getPlateNumber() !== $plateNumber
         );
 
